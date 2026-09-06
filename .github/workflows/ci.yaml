@@ -5,7 +5,7 @@ on:
     branches:
       - master
   
-  pull-request:
+  pull_request :
     branches:
       - master
 
@@ -19,4 +19,4 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-      - run: npm run build
+      - run: npm run buil
