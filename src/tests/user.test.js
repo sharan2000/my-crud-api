@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../server');
+const app = require('../server');
 const sequelize = require('../config/database');
 const { describe, it, expect, beforeAll, afterAll } = require('@jest/globals');
 
