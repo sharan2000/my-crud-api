@@ -2,7 +2,7 @@ const express = require('express');
 const sequelize = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 
-function hello() {}
+// function hello() {}
 
 const app = express();
 app.use(express.json());
