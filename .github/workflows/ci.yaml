@@ -63,6 +63,7 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: build-output
+      - run: pwd
       - run: ls -la
       - run: ls -la /dist
 
