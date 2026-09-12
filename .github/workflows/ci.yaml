@@ -66,6 +66,6 @@ jobs:
           path: dist/
       - run: pwd
       - run: ls -la
-      - run: ls -la /dist
+      - run: ls -la dist
 
       
