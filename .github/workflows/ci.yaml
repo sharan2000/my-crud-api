@@ -11,6 +11,7 @@ on:
 
 env:
   ENV_START_MESSAGE: "Beep Boop!! Starting"
+  ENV_SECRET_MESSAGE: ${{ secrets.SECRET_MESSAGE }}
 
 jobs:
   lint:
