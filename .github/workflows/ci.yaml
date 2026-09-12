@@ -9,6 +9,9 @@ on:
     branches:
       - master
 
+  env:
+    ENV_START_MESSAGE: "Beep Boop!! Starting"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
