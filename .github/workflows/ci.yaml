@@ -83,21 +83,11 @@ jobs:
           path: dist/
       - run: echo "Deploying to Staging => build version => ${{needs.build.outputs.build_version}}"
 
-  pre-deploy-production:
-    runs-on: ubuntu-latest
-    needs: 
-      - deploy-staging
-
-    environment: production
-
-    steps:
-      - run: echo "Test Test Test!!!"
-
   deploy-production:
     runs-on: ubuntu-latest
     needs: 
       - build
-      - pre-deploy-production
+      - deploy-staging
 
     environment: production
 
