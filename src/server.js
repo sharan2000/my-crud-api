@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 console.log(`__________________${process.env.START_MESSAGE}__________________`)
 console.log(`__________________${process.env.ENV_START_MESSAGE}__________________`)
 console.log(`__________________${process.env.ENV_SECRET_MESSAGE}__________________`)
+console.log(`__________________${process.env.DB_URL}__________________`)
 
 const app = express();
 app.use(express.json());
