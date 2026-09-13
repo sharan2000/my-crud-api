@@ -3,7 +3,7 @@ const sequelize = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 
 // function hello() {}
-console.log(`__________________${process.env.START_MESSAGE}__________________`)
+// console.log(`__________________${process.env.START_MESSAGE}__________________`)
 console.log(`__________________${process.env.ENV_START_MESSAGE}__________________`)
 console.log(`__________________${process.env.ENV_SECRET_MESSAGE}__________________`)
 
