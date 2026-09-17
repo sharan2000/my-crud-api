@@ -15,7 +15,7 @@ env:
 
 jobs:
   trigger-reusable-flow:
-    uses: "./.github/workflows/reusable-ci.yaml"
+    uses: "./.github/workflows/resusable-ci.yaml"
 
   lint:
     runs-on: ubuntu-latest

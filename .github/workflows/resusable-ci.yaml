@@ -1,0 +1,10 @@
+name: reusable-ci
+on:
+  worflow_call:
+
+jobs:
+  say-hello:
+    runs-on: ubuntu@latest
+
+    steps:
+      - echo "hello there! in the resusable worflow step"
