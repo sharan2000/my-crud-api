@@ -14,6 +14,9 @@ env:
   ENV_SECRET_MESSAGE: ${{ secrets.SECRET_MESSAGE }}
 
 jobs:
+  trigger-reusable-flow:
+    uses: "./.github/workflows/reusable-ci.yaml"
+
   lint:
     runs-on: ubuntu-latest
 
