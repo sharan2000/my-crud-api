@@ -1,6 +1,6 @@
 name: reusable-ci
 on:
-  worflow_call:
+  workflow_call:
 
 jobs:
   say-hello:
