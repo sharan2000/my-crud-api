@@ -1,6 +1,10 @@
 name: reusable-ci
 on:
   workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
 
 jobs:
   say-hello:
@@ -8,3 +12,4 @@ jobs:
 
     steps:
       - run: echo "hello there! in the resusable worflow step"
+      - run: echo "node version is => ${{ inputs.node-version }}"
