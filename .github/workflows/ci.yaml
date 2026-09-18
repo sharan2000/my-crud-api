@@ -18,6 +18,8 @@ jobs:
     uses: "./.github/workflows/resusable-ci.yaml"
     with:
       node-version: 22
+    secrets:
+      sec-message: "dobe dobe doooo"
 
   lint:
     runs-on: ubuntu-latest

@@ -5,6 +5,10 @@ on:
       node-version:
         required: true
         type: string
+    
+    secrets:
+      sec-message: 
+        required: true
 
 jobs:
   say-hello:
@@ -13,3 +17,4 @@ jobs:
     steps:
       - run: echo "hello there! in the resusable worflow step"
       - run: echo "node version is => ${{ inputs.node-version }}"
+      - run: echo "seret message is => ${{ secrets.sec-message }}"
