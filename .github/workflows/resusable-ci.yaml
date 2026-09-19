@@ -11,7 +11,9 @@ on:
         required: true
 
     outputs:
-      version: ${{ jobs.say-hello.outputs.version }}
+      version: 
+        description: "dummy build version"
+        value: ${{ jobs.say-hello.outputs.version }}
 
 jobs:
   say-hello:
