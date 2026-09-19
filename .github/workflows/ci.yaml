@@ -58,6 +58,7 @@ jobs:
     needs:
       - lint
       - test
+      - trigger-reusable-flow
 
     outputs:
       build_version: ${{ steps.versioning.outputs.version }}
@@ -73,6 +74,7 @@ jobs:
       - name: build-versioning
         id: versioning
         run: echo "version=1.0.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+      - run: echo "output from reusable workflow => ${{ needs.trigger-reusable-flow.outputs.version }}"
       - uses: actions/upload-artifact@v7
         with:
           name: build-output
