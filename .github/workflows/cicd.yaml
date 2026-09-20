@@ -1,0 +1,99 @@
+name: "CI CD workflow"
+
+on:
+  pull_request:
+    branches:
+      - master
+  
+  push:
+    branches:
+      - master
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test
+
+  build:
+    needs:
+      - lint
+      - test
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      tag: ${{steps.build_tag.outputs.tag}}
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: build_output
+          path: "dist/"
+      - name: 'tagging the build'
+        id: build_tag
+        run: echo "tag=${{github.sha}}" >> "$GITHUB_OUTPUT"
+
+
+  deploy-staging:
+    needs:
+      - build
+    
+    if: github.ref == 'refs/heads/master'
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: build_output
+          path: "dist/"
+      - run: echo "deploying build with tag => ${{needs.build.outputs.tag}} => to staging"
+  
+  deploy-production:
+    needs:
+      - deploy-staging
+
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: build_output
+          path: "dist/"
+      - run: echo "deploying build with tag => ${{needs.build.outputs.tag}} => to production"
+
+
+
+  
+  
+  
