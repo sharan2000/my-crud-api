@@ -1,0 +1,31 @@
+name: reusable-ci
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+    
+    secrets:
+      sec-message: 
+        required: true
+
+    outputs:
+      version: 
+        description: "dummy build version"
+        value: ${{ jobs.say-hello.outputs.version }}
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.versioning.outputs.version }}
+
+    steps:
+      - run: echo "hello there! in the resusable worflow step"
+      - run: echo "node version is => ${{ inputs.node-version }}"
+      - run: echo "seret message is => ${{ secrets.sec-message }}"
+      - name: return version number
+        id: versioning
+        run: echo "version=1.0.0" >> "$GITHUB_OUTPUT"

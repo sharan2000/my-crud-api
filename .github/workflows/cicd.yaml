@@ -79,6 +79,7 @@ jobs:
   
   deploy-production:
     needs:
+      - build
       - deploy-staging
 
     runs-on: ubuntu-latest

@@ -3,17 +3,24 @@ name: CI
 on:
   push:
     branches:
-      - '**'
+      - none
   
   pull_request :
     branches:
-      - master
+      - none
 
 env:
   ENV_START_MESSAGE: "Beep Boop!! Starting"
   ENV_SECRET_MESSAGE: ${{ secrets.SECRET_MESSAGE }}
 
 jobs:
+  trigger-reusable-flow:
+    uses: "./.github/workflows/resusable-ci.yaml"
+    with:
+      node-version: 22
+    secrets:
+      sec-message: "dobe dobe doooo"
+
   lint:
     runs-on: ubuntu-latest
 
@@ -51,6 +58,7 @@ jobs:
     needs:
       - lint
       - test
+      - trigger-reusable-flow
 
     outputs:
       build_version: ${{ steps.versioning.outputs.version }}
@@ -66,6 +74,7 @@ jobs:
       - name: build-versioning
         id: versioning
         run: echo "version=1.0.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+      - run: echo "output from reusable workflow => ${{ needs.trigger-reusable-flow.outputs.version }}"
       - uses: actions/upload-artifact@v7
         with:
           name: build-output
