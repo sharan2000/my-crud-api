@@ -25,6 +25,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - name: Show GitHub context
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Run: ${{ github.run_number }}"
   
   test:
     runs-on: ubuntu-latest
