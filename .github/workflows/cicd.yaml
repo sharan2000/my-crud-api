@@ -84,14 +84,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: curl --fail https://google.com
+      - run: curl --fail https://uwbfywbubf.com
 
   
   deploy-production:
     needs:
       - build
       - health-check
-      - deploy-staging
 
     runs-on: ubuntu-latest
 
