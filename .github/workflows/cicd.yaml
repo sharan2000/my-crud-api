@@ -76,10 +76,21 @@ jobs:
           name: build_output
           path: "dist/"
       - run: echo "deploying build with tag => ${{needs.build.outputs.tag}} => to staging"
+
+  health-check:
+    needs:
+      - deploy-staging
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: curl --fail https://google.com
+
   
   deploy-production:
     needs:
       - build
+      - health-check
       - deploy-staging
 
     runs-on: ubuntu-latest
