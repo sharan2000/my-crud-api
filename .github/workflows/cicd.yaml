@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: curl --fail https://uwbfywbubf.com
+      - run: curl --fail https://google.com
 
   
   deploy-production:
