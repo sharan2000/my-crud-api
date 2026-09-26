@@ -48,4 +48,4 @@ jobs:
       
       - name: output image name
         id: image_name_output
-        run: echo "image_name=${{ secrets.DOCKER_USERNAME }}/${{ inputs.repo_name }}:${{ github.sha }}" >> "$GITHUB_OUTPUT"
+        run: echo "image_name=${{ inputs.repo_name }}:${{ github.sha }}" >> "$GITHUB_OUTPUT"
