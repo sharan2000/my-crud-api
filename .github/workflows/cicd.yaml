@@ -43,6 +43,9 @@ jobs:
     uses: "./.github/workflows/docker-publish.yaml"
     with:
       repo_name: my-crud-api 
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
 
 
   deploy-staging:

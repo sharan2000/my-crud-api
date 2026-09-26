@@ -7,6 +7,12 @@ on:
         required: true
         type: string
 
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+      DOCKER_PAT:
+        required: true
+
     outputs:
       image_name:
         description: image name with tag
