@@ -1,0 +1,42 @@
+name: ECS deployment
+
+on:
+  workflow_call:
+    inputs:
+      image_name:
+        required: true
+        type: string
+    
+    secrets:
+      DOCKER_USERNAME:
+        required: true
+
+   
+
+jobs:
+  deploy-to-ecs:
+    uses: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::164072143360:role/github-workflow-ecs-role 
+          aws-region: eu-north-1
+
+      - name: Render Amazon ECS task definition
+        id: render-web-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: practical-app-34g1hl-revision1.json # The task definition file in your repo
+          container-name: Main # Must match the container name in your JSON
+          # It is best practice to tag images with the commit SHA for tracking
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_name }}
+
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+          service: practical-app-34g1hl-service-9lo42r5h # The name of your ECS Service
+          cluster: productive-lion-eiwgxb # The name of your ECS Cluster
+          wait-for-service-stability: true

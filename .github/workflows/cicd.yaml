@@ -54,10 +54,11 @@ jobs:
     
     if: github.ref == 'refs/heads/master'
     
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: echo "deploying build with image => ${{needs.build.outputs.image_name}} => to staging"
+    uses: "./.github/workflows/ecs-deploy.yaml"
+    with:
+      image_name: ${{needs.build.outputs.image_name}}
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
   health-check:
     needs:
