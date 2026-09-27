@@ -15,7 +15,7 @@ on:
 
 jobs:
   deploy-to-ecs:
-    uses: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Configure AWS credentials
