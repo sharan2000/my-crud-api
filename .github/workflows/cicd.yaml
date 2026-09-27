@@ -51,6 +51,12 @@ jobs:
   deploy-staging:
     needs:
       - build
+
+    # Add the permissions block to allow OIDC token generation
+    permissions:
+      id-token: write
+      contents: read
+
     
     if: github.ref == 'refs/heads/master'
     

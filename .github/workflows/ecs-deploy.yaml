@@ -17,6 +17,11 @@ jobs:
   deploy-to-ecs:
     runs-on: ubuntu-latest
 
+    # Add the permissions block to allow OIDC token generation
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
@@ -31,7 +36,7 @@ jobs:
           task-definition: practical-app-34g1hl-revision1.json # The task definition file in your repo
           container-name: Main # Must match the container name in your JSON
           # It is best practice to tag images with the commit SHA for tracking
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_name }}
+          image: ${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name }}
 
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
