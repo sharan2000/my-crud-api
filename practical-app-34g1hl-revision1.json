@@ -17,17 +17,21 @@
             "essential": true,
             "environment": [],
             "environmentFiles": [],
-            "mountPoints": [],
             "volumesFrom": [],
             "ulimits": [],
-            "systemControls": []
+            "systemControls": [],
+            "mountPoints": [
+                {
+                    "sourceVolume": "efs-sqlite-data",
+                    "containerPath": "/mnt/efs"
+                }
+            ]
         }
     ],
     "family": "practical-app-34g1hl",
     "executionRoleArn": "arn:aws:iam::164072143360:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
-    "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
         {
@@ -55,5 +59,14 @@
     "registeredAt": "2026-09-27T10:26:34.207Z",
     "registeredBy": "arn:aws:iam::164072143360:root",
     "enableFaultInjection": false,
-    "tags": []
+    "tags": [],
+    "volumes": [
+        {
+            "name": "efs-sqlite-data",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-02174fea262a3c260",
+                "transitEncryption": "ENABLED"
+            }
+        }
+    ]
 }

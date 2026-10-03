@@ -1,3 +1,7 @@
+const path = require("path")
+
+process.loadEnvFile(".env")
+
 const express = require('express');
 const sequelize = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
@@ -11,6 +15,13 @@ const app = express();
 app.use(express.json());
 
 app.use('/api', userRoutes);
+app.get('/health', (_, res) => {
+  const db_path = Boolean(process.env.IS_DEVELOPMENT) === true ? path.resolve(__dirname, "../../../database.sqlite") : "/mnt/efs/database.sqlite"
+  res.status(200).json({
+    message: "server is up and running!!!",
+    db_path
+  })
+})
 
 const PORT = process.env.PORT || 3000;
 
