@@ -1,6 +1,6 @@
-const path = require("path")
+require('dotenv').config()
 
-process.loadEnvFile(".env")
+const path = require("path")
 
 const express = require('express');
 const sequelize = require('./config/database');
