@@ -5,6 +5,7 @@ exports.createUser = async (req, res) => {
     const user = await User.create(req.body);
     res.status(201).json(user);
   } catch (error) {
+    // console.log(error)
     res.status(400).json({ error: error.message });
   }
 };
@@ -14,6 +15,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.findAll();
     res.status(200).json(users);
   } catch (error) {
+    // console.log(error)
     res.status(500).json({ error: error.message });
   }
 };
@@ -24,6 +26,7 @@ exports.getUserById = async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json(user);
   } catch (error) {
+    // console.log(error)
     res.status(500).json({ error: error.message });
   }
 };
@@ -36,6 +39,7 @@ exports.updateUser = async (req, res) => {
     await user.update(req.body);
     res.status(200).json(user);
   } catch (error) {
+    // console.log(error)
     res.status(400).json({ error: error.message });
   }
 };
@@ -48,6 +52,7 @@ exports.deleteUser = async (req, res) => {
     await user.destroy();
     res.status(204).send();
   } catch (error) {
+    // console.log(error)
     res.status(500).json({ error: error.message });
   }
 };

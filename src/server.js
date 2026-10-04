@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use('/api', userRoutes);
 app.get('/health', (_, res) => {
-  const db_path = Boolean(process.env.IS_DEVELOPMENT) === true ? path.resolve(__dirname, "../../../database.sqlite") : "/mnt/efs/database.sqlite"
+  const db_path = ['development', 'test'].includes(process.env.NODE_ENV) ? path.resolve(__dirname, "../../../database.sqlite") : "/mnt/efs/database.sqlite"
   res.status(200).json({
     message: "server is up and running!!!",
     db_path

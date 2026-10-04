@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const path = require("path")
 
-const db_path = process.env.IS_DEVELOPMENT === 'true' ? path.resolve(process.cwd(), 'database.sqlite') : "/mnt/efs/database.sqlite"
+const db_path = ['development', 'test'].includes(process.env.NODE_ENV) ? path.resolve(process.cwd(), 'database.sqlite') : "/mnt/efs/database.sqlite"
 console.log("db path -- " + db_path)
 
 const sequelize = new Sequelize({
