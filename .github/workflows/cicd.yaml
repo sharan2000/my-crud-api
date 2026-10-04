@@ -73,8 +73,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: curl --fail https://jdfbusdbfdbdsbfs.com
-
+      # Use the static ALB DNS name. Pointing to the /health endpoint you created in server.js
+      - name: Verify Staging Environment
+        run: curl --fail http://ecs-tasks-load-balancer-96431182.eu-north-1.elb.amazonaws.com/health
   
   deploy-production:
     needs:
@@ -87,6 +88,8 @@ jobs:
 
     steps:
       - run: echo "deploying build with tag => ${{needs.build.outputs.image_name}} => to production"
+      # In the future, this step will call ecs-deploy.yaml reusable workflow again, 
+      # but pass in the production ECS cluster and service names.
 
 
 
