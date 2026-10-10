@@ -75,7 +75,7 @@ jobs:
     steps:
       # Use the static ALB DNS name. Pointing to the /health endpoint you created in server.js
       - name: Verify Staging Environment
-        run: curl --fail http://ecs-tasks-load-balancer-96431182.eu-north-1.elb.amazonaws.com/health
+        run: curl --fail https://simpleapi.noxvoid.top/health
   
   deploy-production:
     needs:
